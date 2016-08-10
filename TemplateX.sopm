@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_package version="1.0">
+    <CVS>$Id$</CVS>
+    <Name>TemplateX</Name>
+    <Vendor>c.a.p.e. IT GmbH</Vendor>
+    <URL>http://www.cape-it.de/</URL>
+    <Description Lang="en">TemplateX - Extension package for OTRS.</Description>
+    <Description Lang="de">TemplateX - Erweiterungspaket fuer OTRS.</Description>
+    <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
+    <Version>5.0.0</Version>
+    <Framework>5.0.x</Framework>
+    <BuildDate>?</BuildDate>
+    <BuildHost>?</BuildHost>
+    <Filelist>
+        <File Permission="644" Location="doc/en/TemplateX.pdf"/>
+        <File Permission="644" Location="doc/en/TemplateX.pod"/>
+        <File Permission="644" Location="doc/CHANGES_TemplateX.md"/>
+        <File Permission="644" Location="Kernel/Config/Files/TemplateX.xml"/>
+        <File Permission="644" Location="Kernel/Language/de_TemplateX.pm"/>
+        <File Permission="644" Location="Kernel/Output/HTML/OutputFilterAdminTemplateX.pm"/>
+        <File Permission="644" Location="Kernel/Output/HTML/OutputFilterAgentTemplateX.pm"/>
+        <File Permission="644" Location="var/packagesetup/TemplateX.pm"/>
+    </Filelist>
+    <DatabaseInstall>
+        <TableCreate Name="standard_templatex">
+            <Column Name="template_id" Required="true" Type="INTEGER" PrimaryKey="true"/>
+            <Column Name="t_to" Type="VARCHAR" Size="3800"/>
+            <Column Name="t_cc" Type="VARCHAR" Size="3800"/>
+            <Column Name="t_bcc" Type="VARCHAR" Size="3800"/>
+            <Column Name="t_ticket_state_id" Type="SMALLINT"/>
+            <Column Name="t_pending_time" Type="INTEGER"/>
+            <Column Name="t_pending_type" Type="INTEGER"/>
+        </TableCreate>
+    </DatabaseInstall>
+    <DatabaseReinstall></DatabaseReinstall>
+    <DatabaseUpgrade></DatabaseUpgrade>
+    <DatabaseUninstall>
+        <TableDrop Name="standard_templatex"/>
+    </DatabaseUninstall>
+    <CodeInstall Type="post"><![CDATA[
+    my $CodeModule = 'var::packagesetup::' . $Param{Structure}->{Name}->{Content};
+    $Kernel::OM->Get($CodeModule)->CodeInstall();
+    ]]>
+    </CodeInstall>
+    <CodeReinstall Type="post"><![CDATA[
+    my $CodeModule = 'var::packagesetup::' . $Param{Structure}->{Name}->{Content};
+    $Kernel::OM->Get($CodeModule)->CodeReinstall();
+    ]]>
+    </CodeReinstall>
+    <CodeUpgrade Type="post"><![CDATA[
+    my $CodeModule = 'var::packagesetup::' . $Param{Structure}->{Name}->{Content};
+    $Kernel::OM->Get($CodeModule)->CodeUpgrade();
+    ]]>
+    </CodeUpgrade>
+    <CodeUninstall Type="pre"><![CDATA[
+    my $CodeModule = 'var::packagesetup::' . $Param{Structure}->{Name}->{Content};
+    $Kernel::OM->Get($CodeModule)->CodeUninstall();
+    ]]>
+    </CodeUninstall>
+    <IntroInstall Type="pre" Title="Install Information" Lang="en"><![CDATA[
+        <br/>
+        <strong>WELCOME</strong>
+        <br/>
+        <br/>
+        You are about to install the OTRS module TemplateX.<br/>
+        <br/>
+        <br/>
+        c.a.p.e. IT ...easy.<br/>
+        <br/>
+    ]]></IntroInstall>
+    <IntroInstall Type="post" Title="Installation Information" Lang="en"><![CDATA[
+        <br/>
+        <strong>Important Advice:</strong>
+        <br/>
+        <br/>
+        You must rebuild your configuration before you continue the use of this OTRS installation.
+        <br/>
+        <br/>
+        c.a.p.e. IT ...easy.<br/>
+        <br/>
+    ]]></IntroInstall>
+    <IntroUpgrade Type="pre" Title="Upgrade Information" Lang="en"><![CDATA[
+        <br/>
+        <strong>WELCOME</strong>
+        <br/>
+        <br/>
+        You are about to upgrade the TemplateX extensions package for OTRS.
+        <br/>
+        <br/>
+        c.a.p.e. IT ...easy.<br/>
+        <br/>
+    ]]></IntroUpgrade>
+    <IntroUpgrade Type="post" Title="Upgrade Information" Lang="en"><![CDATA[
+        <br/>
+        <strong>Important Advice:</strong>
+        <br/>
+        <br/>
+        You must rebuild your configuration before you continue the use of this OTRS installation.
+        <br/>
+        <br/>
+        c.a.p.e. IT ...easy.<br/>
+        <br/>
+    ]]></IntroUpgrade>
+    <IntroUninstall Type="pre" Title="Uninstallation Information" Lang="en"><![CDATA[
+        <br/>
+        <strong>WELCOME</strong>
+        <br/>
+        <br/>
+        You are about to UNINSTALL the TemplateX extensions package for OTRS.<br/>
+        <br/>
+        <strong>Important Advice:</strong><br/>
+        <br/>
+        TemplateX related database table will be dropped. Recipients from templates are going to be permanently deleted also in case of reinstallation.<br/>
+        <br/>
+        <br/>
+        <br/>
+        c.a.p.e. IT ...easy.<br/>
+        <br/>
+    ]]></IntroUninstall>
+</otrs_package>
